@@ -18,13 +18,20 @@ db = Database(Var.DATABASE_URL, Var.name)
 MY_PASS = os.environ.get("MY_PASS", None)
 pass_dict = {}
 pass_db = Database(Var.DATABASE_URL, "ag_passwords")
+USERS = [1277771711, 1991522624, 5672857559, 2086730987]
 
 
 
-
-@StreamBot.on_message((filters.private) & (filters.document | filters.video | filters.audio | filters.photo) , group=4)
+@StreamBot.on_message((filters.private) & (filters.document | filters.video | filters.audio) , group=4)
 async def private_receive_handler(c: Client, m: Message):
-    if not await db.is_user_exist(m.from_user.id):
+    # if not await db.is_user_exist(m.from_user.id):
+    if m.from_user.id not in USERS:
+        await m.reply("MadarChod Ye Tere Baap Ka Mal nai he")
+        await asyncio.sleep(2)
+        await m.reply("Chala jaa BSDK")
+        await asyncio.sleep(2)
+        await m.reply("Teri Maa Ki Chut 3 Baar")
+    else:
         await db.add_user(m.from_user.id)
         await c.send_message(
             Var.BIN_CHANNEL,
@@ -52,7 +59,7 @@ async def private_receive_handler(c: Client, m: Message):
         await c.send_message(chat_id=Var.BIN_CHANNEL, text=f"Gᴏᴛ FʟᴏᴏᴅWᴀɪᴛ ᴏғ {str(e.x)}s from [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n\n**𝚄𝚜𝚎𝚛 𝙸𝙳 :** `{str(m.from_user.id)}`", disable_web_page_preview=True)
 
 
-@StreamBot.on_message(filters.channel & ~filters.group & (filters.document | filters.video | filters.photo)  & ~filters.forwarded, group=-1)
+@StreamBot.on_message(filters.channel & ~filters.group & (filters.document | filters.video)  & ~filters.forwarded, group=-1)
 async def channel_receive_handler(bot, broadcast):
     if int(broadcast.chat.id) in Var.BANNED_CHANNELS:
         await bot.leave_chat(broadcast.chat.id)
