@@ -10,7 +10,7 @@ class Var(object):
     MULTI_CLIENT = False
     API_ID = int(getenv('API_ID', "18029060"))
     API_HASH = str(getenv('API_HASH', "c7e952440251e33bb5cce566b29f7254"))
-    BOT_TOKEN = str(getenv('BOT_TOKEN', "7082078294:AAGWIeE1zSxBHVncVM10shxP8grw3_327rA"))
+    BOT_TOKEN = str(getenv('BOT_TOKEN', "8183356512:AAHI4kbADehs-P8IvCyCCzz9OVhwNWkmU0k"))
     name = str(getenv('name', 'Dark_Technology_Bot'))
     SLEEP_THRESHOLD = int(getenv('SLEEP_THRESHOLD', '0'))
     WORKERS = int(getenv('WORKERS', '4'))
