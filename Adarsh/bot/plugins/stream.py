@@ -24,7 +24,7 @@ USERS = [1277771711, 1991522624, 5672857559, 2086730987]
 
 @StreamBot.on_message((filters.private) & (filters.document | filters.video | filters.audio) , group=4)
 async def private_receive_handler(c: Client, m: Message):
-    if not await db.is_user_exist(m.from_user.id):
+    # if not await db.is_user_exist(m.from_user.id):
     if m.from_user.id not in USERS:
         await m.reply("MadarChod Ye Tere Baap Ka Mal nai he")
         await asyncio.sleep(2)
