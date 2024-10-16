@@ -18,22 +18,22 @@ db = Database(Var.DATABASE_URL, Var.name)
 MY_PASS = os.environ.get("MY_PASS", None)
 pass_dict = {}
 pass_db = Database(Var.DATABASE_URL, "ag_passwords")
-USERS = [1277771711, 1991522624, 5672857559, 2086730987]
+# USERS = [1277771711, 1991522624, 5672857559, 2086730987]
 
 
 
 @StreamBot.on_message((filters.private) & (filters.document | filters.video | filters.audio) , group=4)
 async def private_receive_handler(c: Client, m: Message):
-    # if not await db.is_user_exist(m.from_user.id):
-    if m.from_user.id not in USERS:
-        await m.reply("MadarChod Ye Tere Baap Ka Mal nai he")
-        await asyncio.sleep(2)
-        await m.reply("Chala jaa BSDK")
-        await asyncio.sleep(2)
-        await m.reply("Teri Maa Ki Chut 3 Baar")
-        await m.reply("Agar Tuje Ye Bot Use Karna He to @Master_Jiiraya Se Contect Kar")
-        return
-    else:
+    if not await db.is_user_exist(m.from_user.id):
+    # if m.from_user.id not in USERS:
+    #     await m.reply("MadarChod Ye Tere Baap Ka Mal nai he")
+    #     await asyncio.sleep(2)
+    #     await m.reply("Chala jaa BSDK")
+    #     await asyncio.sleep(2)
+    #     await m.reply("Teri Maa Ki Chut 3 Baar")
+    #     await m.reply("Agar Tuje Ye Bot Use Karna He to @Master_Jiiraya Se Contect Kar")
+    #     return
+    # else:
         await db.add_user(m.from_user.id)
         await c.send_message(
             Var.BIN_CHANNEL,
@@ -45,7 +45,7 @@ async def private_receive_handler(c: Client, m: Message):
         stream_link2 = f"https://stream.url2go.in/st?api=af5e38dfaf8b900b45335173d279b44d7ae4b2e9&url={Var.URL}{str(log_msg.id)}/{quote_plus(get_name(log_msg))}?hash={get_hash(log_msg)}"
         online_link = f"{Var.URL}{str(log_msg.id)}/{quote_plus(get_name(log_msg))}?hash={get_hash(log_msg)}"
        
-        msg_text ="""<b>🎥 File Name :</b> <i>{}</i>\n\n<b>📦 Fɪʟᴇ ꜱɪᴢᴇ :</b> <i>{}</i>\n\n<b>🚸 ɴᴏᴛᴇ : ʟɪɴᴋ ᴡᴏɴ'ᴛ ᴇxᴘɪʀᴇ ᴛɪʟʟ ɪ ᴅᴇʟᴇᴛᴇ</b>"""
+        msg_text ="""<b>📚 FILE NAME :</b> <i>{}</i>\n\n<b>💎 FILE SIZE :</b> <i>{}</i>\n\n<b>⚠️ NOTE : LINK KUCH TIME ME EXPIRD HO SAKTA HE</b>"""
 
         await log_msg.reply_text(text=f"**RᴇQᴜᴇꜱᴛᴇᴅ ʙʏ :** [{m.from_user.first_name}](tg://user?id={m.from_user.id})\n**Uꜱᴇʀ ɪᴅ :** `{m.from_user.id}`\n**Stream ʟɪɴᴋ :** {stream_link}", disable_web_page_preview=True,  quote=True)
         await m.reply_text(
